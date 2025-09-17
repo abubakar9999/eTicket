@@ -1,4 +1,7 @@
 import 'package:eticket/blocs/bloc/login_bloc.dart';
+import 'package:eticket/config/routes/routes_name.dart';
+import 'package:eticket/utils/custom_button.dart';
+import 'package:eticket/views/home/home_screen.dart' hide CustomButton;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,13 +14,20 @@ class LoginButton extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
         buildWhen: (previous, current) => false,
         builder: (context, state) {
-          return ElevatedButton(
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  print('i am here');
-                }
-              },
-              child: const Text("Login"));
+          return CustomButton(
+            isPrimary: true,
+            btnText: 'login',
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                Navigator.pushNamedAndRemoveUntil(context, RoutesName.homeScreen, (route) => false);
+
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(builder: (_) => const HomeScreen()),
+                // );
+              }
+            },
+          );
         });
   }
 }

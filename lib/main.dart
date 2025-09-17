@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: RoutesName.splashScreen,
       onGenerateRoute: Routes.generateRoute,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
