@@ -1,5 +1,4 @@
-import 'package:eticket/config/routes/routes.dart';
-import 'package:eticket/config/routes/routes_name.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,8 +17,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: RoutesName.splashScreen,
-      onGenerateRoute: Routes.generateRoute,
+      home: const Scaffold(
+        body: Center(
+          child: Text('Hello, World!'),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
