@@ -35,8 +35,7 @@ Future<T?> fadePushRemoveUntilM<T>(
   BuildContext context,
   Widget page, {
   Duration duration = const Duration(milliseconds: 150),
-}) =>
-    Navigator.pushAndRemoveUntil<T>(
+}) => Navigator.pushAndRemoveUntil<T>(
       context,
       PageRouteBuilder<T>(
         transitionDuration: duration,
@@ -75,15 +74,13 @@ class SizeRoute extends PageRouteBuilder {
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
-          ) =>
-              page,
+          ) => page,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
             Widget child,
-          ) =>
-              Align(
+          ) => Align(
             child: SizeTransition(
               sizeFactor: animation,
               child: child,
@@ -105,15 +102,13 @@ class SlideRightRoute extends PageRouteBuilder {
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
-          ) =>
-              page,
+          ) => page,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
             Widget child,
-          ) =>
-              SlideTransition(
+          ) => SlideTransition(
             position: Tween<Offset>(
               begin: const Offset(-1, 0),
               end: Offset.zero,
@@ -136,15 +131,13 @@ class SlideLeftRoute extends PageRouteBuilder {
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
-          ) =>
-              page,
+          ) => page,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
             Widget child,
-          ) =>
-              SlideTransition(
+          ) => SlideTransition(
             position: Tween<Offset>(
               begin: const Offset(1, 0),
               end: Offset.zero,
@@ -174,8 +167,7 @@ class ScaleRoute extends PageRouteBuilder {
             Animation<double> animation,
             Animation<double> secondaryAnimation,
             Widget child,
-          ) =>
-              ScaleTransition(
+          ) => ScaleTransition(
             scale: Tween<double>(
               begin: 0.0,
               end: 1.0,
@@ -203,15 +195,13 @@ class FadeRoute extends PageRouteBuilder {
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
-          ) =>
-              page,
+          ) => page,
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
             Widget child,
-          ) =>
-              FadeTransition(
+          ) => FadeTransition(
             opacity: animation,
             child: child,
           ),

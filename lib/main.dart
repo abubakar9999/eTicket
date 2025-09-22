@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
           child: Text('Hello, World!'),
         ),
       ),
+      //initialRoute: RoutesName.splashScreen,
+      //onGenerateRoute: Routes.generateRoute,
       debugShowCheckedModeBanner: false,
     );
   }
