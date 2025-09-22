@@ -1,4 +1,5 @@
 
+import 'package:eticket/src/features/view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,13 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello, World!'),
-        ),
-      ),
-      //initialRoute: RoutesName.splashScreen,
-      //onGenerateRoute: Routes.generateRoute,
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
