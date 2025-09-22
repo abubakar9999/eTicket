@@ -39,7 +39,6 @@ dependencies:
   http: ^1.5.0
   equatable: ^2.0.7
   flutter_svg: ^2.2.1
-  presentation_displays: ^1.0.0
   flutter_dotenv: ^6.0.0
   hive_flutter: ^1.1.0
   flutter_screenutil: ^5.9.3
