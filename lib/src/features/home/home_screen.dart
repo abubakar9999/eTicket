@@ -1,5 +1,6 @@
 
 
+import 'package:eticket/src/core/utils/color_utils.dart';
 import 'package:eticket/src/features/home/widgets/home_screen_custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
         appBar: AppBar(
-          // backgroundColor: AppColors.getPrimaryGradientColor(),
+           backgroundColor: ColorUtils.getPrimaryGradientColor(),
           iconTheme: const IconThemeData(
             color: Colors.white, // Change drawer icon color to white
           ),
-          // title: Text('Home Screen', style: TextStyle(color: AppColors.getBackgroundColor()),),
+           title: Text('Home Screen', style: TextStyle(color: ColorUtils.getBackgroundColor()),),
         ),
       body: SingleChildScrollView(
         child: Padding(
@@ -124,11 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
                         )
-
                       ],
                     ),
                   ),
-
                 ],
               ),
             ],

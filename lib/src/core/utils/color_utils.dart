@@ -4,9 +4,7 @@ class ColorUtils {
   static Color availabeTableColor = const Color(0xFF49D18F);
   static Color filterBack = const Color(0xFF1EA834);
   static Color reservedTableColor = Color(0xFFE13C3C);
-  // static Color prereservedTableColor = Color.fromARGB(255, 99, 3, 3);
   static Color orderedTableColor = const Color.fromARGB(255, 136, 169, 196);
-  // static Color orderedTableColor = Color(0xFFED7A08);
   static Color primaryColor = const Color(0xFFFDFEFF);
   static Color secondaryColor = const Color(0xFF50525F);
   static Color greyColor = const Color(0xFF33363B);
@@ -25,4 +23,15 @@ class ColorUtils {
   static Color served = const Color(0xBF8F8800);
 
   static Color delivery_collectionColor = const Color(0xFFFEC145);
+
+  static Color getPrimaryColor() {
+    return const Color(0xFF0054A6);
+  }
+
+  static Color getPrimaryGradientColor() {
+    return const Color(0xFF3884CE);
+  }
+  static Color getBackgroundColor() {
+    return const Color(0xFFF1F2F5);
+  }
 }

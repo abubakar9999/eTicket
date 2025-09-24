@@ -1,120 +1,84 @@
-// ignore_for_file: deprecated_member_use
-import 'package:eticket/src/core/utils/color_utils.dart';
+
+import 'package:eticket/src/core/themes/color_scheme.dart';
+import 'package:eticket/src/core/utils/all_size.dart';
 import 'package:eticket/src/core/utils/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class CustomContainer extends StatelessWidget {
-  final String text;
-  final IconData? icon;
-  final Color color;
-  final bool isNotificationButton;
-  final int? readyFoodCount;
-  int height,width;
 
-   CustomContainer({super.key, required this.icon, required this.text, required this.color, this.isNotificationButton=false, this.readyFoodCount=0,this.height=100,this.width=550});
+class CustomButton extends StatelessWidget {
+  final String btnText;
+  final VoidCallback? onTap;
+  final bool isColor, isPrimary, isLoading;
+  final double height;
+  final TextStyle? textStyle;
+  final dynamic icon; // ✅ can be String (SVG path) or IconData
+  final Color? bgColor, txtColor;
+
+  const CustomButton({
+    super.key,
+    required this.btnText,
+    required this.onTap,
+    this.isColor = false,
+    this.isPrimary = false,
+    this.isLoading = false,
+    this.height = 48,
+    this.textStyle,
+    this.icon,
+    this.bgColor = Colors.blue,
+    this.txtColor,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.all(8.h),
-      width: width.w,
-      height: height.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28.r),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(28.r),
-        child: Stack(
+    final Color effectiveTextColor = txtColor ??
+        (isColor
+            ? Theme.of(context).colorScheme.textColor
+            : isPrimary
+            ? Theme.of(context).colorScheme.whiteColor
+            : Theme.of(context).colorScheme.textColor);
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: height,
+        padding: const EdgeInsets.symmetric(
+            horizontal: AllSizes.paddingSizeDefault,
+            vertical: AllSizes.paddingSizeMiniSmall),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: bgColor ??
+              (isColor
+                  ? Theme.of(context).scaffoldBackgroundColor
+                  : isPrimary
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).colorScheme.gray_20),
+        ),
+        child: isLoading
+            ? SizedBox(
+            height: 30,
+            width: 30,
+            child: CircularProgressIndicator(color: effectiveTextColor))
+            : Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 2.w, color: ColorUtils.secondaryColor),
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.all(Radius.circular(28.r)),
-                  boxShadow: [
-                    // BoxShadow(
-                    //   color: ColorUtils.secondaryColor.withOpacity(0.6),
-                    //   blurRadius: 10,
-                    //   spreadRadius: 20,
-                    //   offset: const Offset(0, 0),
-                    // ),
-                    BoxShadow(
-                      color: color.withOpacity(0.6),
-                      blurRadius: 20.r,
-                      spreadRadius: 40.r,
-                      offset: Offset(0.w, 0.h),
-                    ),
-                    // BoxShadow(
-                    //   color: ColorUtils.primaryColor.withOpacity(0.45),
-                    //   blurRadius: 8,
-                    //   spreadRadius: -30,
-                    //   offset: const Offset(0, 0),
-                    // ),
-                    BoxShadow(
-                      color: ColorUtils.primaryColor.withOpacity(0.45),
-                      blurRadius: 16.r,
-                      spreadRadius: -60.r,
-                      offset: Offset(0.w, 0.h),
-                    ),
-                    // BoxShadow(
-                    //   color: ColorUtils.primaryColor.withOpacity(1),
-                    //   blurRadius: 20,
-                    //   spreadRadius: -10,
-                    //   offset: const Offset(0, 2),
-                    // ),
-                    BoxShadow(
-                      color: ColorUtils.primaryColor.withOpacity(1),
-                      blurRadius: 40.r,
-                      spreadRadius: -20.r,
-                      offset: Offset(0.w, 4.h),
-                    ),
-                  ],
-                ),
+            if (icon != null) ...[
+              icon is IconData
+                  ? Icon(icon, size: 24, color: effectiveTextColor) // ✅ Material Icon
+                  : SvgPicture.asset(
+                icon as String, // ✅ SVG asset
+                height: 24,
+                width: 24,
+                color: effectiveTextColor,
               ),
+              const SizedBox(width: 5),
+            ],
+            Text(
+              btnText,
+              style: textStyle ??
+                  robotoRegular.copyWith(color: effectiveTextColor),
             ),
-            Row(
-              children: [
-                icon != null
-                    ? Expanded(
-                        flex: 2,
-                        child: Icon(
-                          icon,
-                          size: 65.r,
-                          color: ColorUtils.black,
-                        ),
-                      )
-                    : Text(''),
-                Expanded(
-                  flex: 5,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 21.h),
-                    child: Text(
-                      text,
-                      textAlign: icon != null ? TextAlign.start : TextAlign.center,
-                      style: MyStyle.heading4,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            isNotificationButton?Positioned(
-                right: 0,
-                top: 0,
-                child: Container(
-                  height: 55.h,
-                  width: 50.w,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2.w, color: ColorUtils.secondaryColor),
-                    color: Colors.green,
-                    borderRadius: BorderRadius.all(Radius.circular(360.r)),
-                  ),
-                  child: Center(child: Text(readyFoodCount.toString(),style: MyStyle.heading1,),),
-
-                )):SizedBox.shrink(),
           ],
         ),
       ),
