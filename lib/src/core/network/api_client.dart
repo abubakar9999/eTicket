@@ -32,8 +32,8 @@ class ApiClient {
       Uri.parse(url),
       body: jsonEncode(data),
       headers: {
-        // 'Authorization': 'Bearer ${HiveOperation().getToken()}',
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     );
 

@@ -27,5 +27,9 @@ class PasswordChanged extends LoginEvent {
 
 class PassUnfocused extends LoginEvent {}
 
-class Submit extends LoginEvent {}
+class Submit extends LoginEvent {
+  String mobile;
+  String pass;
+  Submit({required this.mobile, required this.pass});
+}
 

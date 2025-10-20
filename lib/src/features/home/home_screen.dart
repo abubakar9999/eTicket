@@ -1,6 +1,8 @@
 
 
 import 'package:eticket/src/core/utils/color_utils.dart';
+import 'package:eticket/src/core/utils/context.dart';
+import 'package:eticket/src/features/dashboard/dashboard.dart';
 import 'package:eticket/src/features/home/widgets/home_screen_custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -79,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: Icons.adb,
                             iconColor: Colors.white,
                             onPressed: () async {
+                               context.fadePushRemoveUntil(  const BusDashboard());
                             },
                           ),
                         ),
