@@ -1,10 +1,8 @@
 
-
+import 'package:eticket/home_drawer.dart';
 import 'package:eticket/src/core/utils/color_utils.dart';
-import 'package:eticket/src/core/utils/context.dart';
-import 'package:eticket/src/features/dashboard/dashboard.dart';
-import 'package:eticket/src/features/home/widgets/home_screen_custom_button.dart';
 import 'package:flutter/material.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
            title: Text('Home Screen', style: TextStyle(color: ColorUtils.getBackgroundColor()),),
         ),
+      drawer: AppDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(6.0),
@@ -35,102 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 children: [
 
-                  Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-
-                        Expanded(
-                          child: CustomButton(
-                            text: "Test",
-                            icon: Icons.sailing_outlined,
-                            onPressed: () {},
-                            iconColor: Colors.white,
-                            //backgroundColor: Colors.green, // ✅ custom background
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-
-                        Expanded(
-                          child: CustomButton(
-                            text: "Test",
-                            icon: Icons.account_balance_wallet,
-                            onPressed: () {},
-                            iconColor: Colors.white,
-                            //backgroundColor: Colors.green, // ✅ custom background
-                          ),
-                        ),
-                        const SizedBox(width: 2),
-                        Expanded(
-                          child: CustomButton(
-                            text: 'Test11',
-                            icon: Icons.adb,
-                            iconColor: Colors.white,
-                            onPressed: () async {
-                               //context.fadePushRemoveUntil(  const BusDashboard());
-                            },
-                          ),
-                        ),
-
-                        const SizedBox(width: 2),
-                        Expanded(
-                          child: CustomButton(
-                            text: 'Test11',
-                            icon: Icons.add_alarm_sharp,
-                            iconColor: Colors.white,
-                            onPressed: () async {
-                            },
-                          ),
-                        )
-
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-
-                        Expanded(
-                          child: CustomButton(
-                            text: "Test",
-                            icon: Icons.tips_and_updates,
-                            onPressed: () {},
-                            iconColor: Colors.white,
-                            //backgroundColor: Colors.green, // ✅ custom background
-                          ),
-                        ),
-                        const SizedBox(width: 2),
-                        Expanded(
-                          child: CustomButton(
-                            text: 'Test11',
-                            icon: Icons.backup_table,
-                            iconColor: Colors.white,
-                            onPressed: () async {
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ],

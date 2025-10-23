@@ -25,11 +25,13 @@ class ColorUtils {
   static Color delivery_collectionColor = const Color(0xFFFEC145);
 
   static Color getPrimaryColor() {
-    return const Color(0xFF0054A6);
+   // return const Color(0xFF0054A6);
+    return const Color(0xff36B7B3);
   }
 
   static Color getPrimaryGradientColor() {
-    return const Color(0xFF3884CE);
+    //return const Color(0xFF3884CE);
+    return const Color(0xff36B7B3);
   }
   static Color getBackgroundColor() {
     return const Color(0xFFF1F2F5);

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:eticket/session_manager.dart';
 import 'package:eticket/src/core/constants/hive_constants.dart';
 import 'package:eticket/src/data/data_sources/local/local_data_sorce.dart';
 import 'package:eticket/src/data/data_sources/remort/remote_data_sorce.dart';
@@ -27,6 +28,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         "password": event.pass.trim(),
       });
       if((data.data?.token ?? '').isNotEmpty || data.message =="OK"){
+        SessionManager prefs = SessionManager();
+        prefs.setAuthToken(data.data!.token!);
+        prefs.setLogin(true);
+
         // Login successful
         //await HiveOperation().addData(data.data!.token , HiveBoxKeys.tocken);
         
