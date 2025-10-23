@@ -26,9 +26,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         "phone": event.mobile.trim(),
         "password": event.pass.trim(),
       });
-      print('sarowar');
-      print('${data.data?.token}');
-      print('${data.message}');
       if((data.data?.token ?? '').isNotEmpty || data.message =="OK"){
         // Login successful
         //await HiveOperation().addData(data.data!.token , HiveBoxKeys.tocken);
