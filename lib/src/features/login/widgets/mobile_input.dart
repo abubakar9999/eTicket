@@ -19,7 +19,10 @@ class MobileInput extends StatelessWidget {
           hintText: 'Enter Mobile No',
           prefixIcon: Icons.phone_android,
           onChanged: (value) {
-            context.read<LoginBloc>().add(MobileChanged(mobile: value ?? ""));
+            
+          
+  context.read<LoginBloc>().add(MobileChanged(mobile:  value?? ''));
+
           },
           validator: (value) {
             if (value == null || value.isEmpty) {

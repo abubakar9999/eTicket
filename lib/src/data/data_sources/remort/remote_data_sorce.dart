@@ -1,12 +1,15 @@
+import 'package:eticket/src/data/models/login_model.dart';
+import 'package:eticket/src/data/repositoris/repositories.dart';
+
 class GetDataFromAPi {
 
   //************** log in ******************* */
 
-  // Future<User> logIn(Map<String, String> body) async {
-  //   User userModel = await Repositories().login(body);
-  //   log(jsonEncode(userModel), name: "User Model");
-  //   return userModel;
-  // }
+  Future<User> logIn(Map<String, String> body) async {
+    User userModel = await Repositories().login(body);
+    
+    return userModel;
+  }
 
   // //******************* branch urse ******************* */
   // Future<List<String>> branchUserList() async {

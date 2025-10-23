@@ -1,19 +1,22 @@
+import 'package:eticket/src/core/constants/api_urls.dart';
+import 'package:eticket/src/core/network/api_client.dart';
+import 'package:eticket/src/data/models/login_model.dart';
+
 class Repositories {
 
 
 
   ///********************  Log in  ***************** */
-  // Future<User> login(Map<String, String> body) async {
-  //   String url = await HiveOperation().getrestData(HiveBoxKeys.baseurl);
-  //   log(url, name: "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
-  //   String data = await apiClient.login(
-  //       ApiUrls().login(await HiveOperation().getrestData(HiveBoxKeys.baseurl)),
-  //       body);
-  //   // log("${jsonDecode(data)['restaurant_info']['currency_symbol']}", name: "currencyssssssssss");
-  //   // await HiveOperation().addData(jsonDecode(data)['restaurant_info']['currency_symbol'], HiveBoxKeys.currency);
-  //   log(jsonEncode(userFromJson(data)), name: "User Modelxxx");
-  //   return userFromJson(data);
-  // }
+  Future<User> login(Map<String, String> body) async {
+
+    String data = await ApiClient().postData (
+        ApiUrls().logIn(),
+        body);
+ 
+
+    // return userFromJson(data);
+    return userFromJson(data);
+  }
 
   // // ************************* Device Setup *************************
   // Future<Map<String, dynamic>> deviceSetup(Map<String, String> body) async {
