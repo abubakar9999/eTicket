@@ -18,6 +18,18 @@ class Repositories {
     return userFromJson(data);
   }
 
+  //**********sub user login   */
+  Future<User> subuserlogin(Map<String, String> body,int id) async {
+
+    String data = await ApiClient().postData (
+        ApiUrls().subuserLogIn(id),
+        body);
+ 
+
+    // return userFromJson(data);
+    return userFromJson(data);
+  }
+
   // // ************************* Device Setup *************************
   // Future<Map<String, dynamic>> deviceSetup(Map<String, String> body) async {
   //   String url = await HiveOperation().getrestData(HiveBoxKeys.baseurl);

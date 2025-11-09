@@ -1,3 +1,4 @@
+import 'package:eticket/src/core/shared/widget/app_widgets/custom_button.dart';
 import 'package:eticket/src/core/utils/context.dart';
 import 'package:eticket/src/features/home/home_screen.dart';
 import 'package:eticket/src/features/login/blocs/login_bloc.dart';
@@ -15,15 +16,17 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   late LoginBloc _loginBloc;
-  FocusNode mobile = FocusNode();
-  FocusNode pass = FocusNode();
+
+  final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+  final TextEditingController _companyController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    super.initState();
     _loginBloc = LoginBloc();
+    super.initState();
   }
 
   @override
@@ -39,38 +42,101 @@ class _LogInScreenState extends State<LogInScreen> {
                 key: _formKey,
                 child: BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
-                    
                     if (state is LoginFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.error),
-                          backgroundColor: Colors.red,
-                        ),
+                        SnackBar(content: Text(state.error), backgroundColor: Colors.red),
                       );
                     } else if (state is LoginSuccess) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                          backgroundColor: Colors.green,
-                        ),
-                      ); 
-
-                      context.fadePushRemoveUntil(  const HomeScreen()); 
-                      
+                        SnackBar(content: Text(state.message), backgroundColor: Colors.green),
+                      );
+                      context.fadePushRemoveUntil(const HomeScreen());
                     }
                   },
                   builder: (context, state) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset('assets/images/noData.png', height: 150),
                         const SizedBox(height: 20),
-                        MobileInput(mobile: mobile),
+                            // Checkbox: Is Master
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: state.isMaster,
+                              onChanged: (value) {
+                                _loginBloc.add(IsMasterChanged(value ?? true));
+                              },
+                            ),
+                            const Text("Super Admin Login"),
+                          ],
+                        ),
+
+                        // Company ID (only if isMaster == false)
+                        if (!state.isMaster)
+                          TextFormField(
+                            controller: _companyController,
+                            decoration: const InputDecoration(labelText: "Company ID"),
+                            onChanged: (value) {
+                              _loginBloc.add(CompanyIdChanged(value));
+                            },
+                          ),
+
+                        // Mobile Input
+                        TextFormField(
+                          controller: _mobileController,
+                          decoration: const InputDecoration(labelText: "Mobile Number"),
+                          keyboardType: TextInputType.phone,
+                          onChanged: (value) {
+                            _loginBloc.add(MobileChanged(value));
+                          },
+                        ),
                         const SizedBox(height: 10),
-                        PassInput(pass: pass),
+
+                        // Password Input
+                        TextFormField(
+                          controller: _passController,
+                          decoration: const InputDecoration(labelText: "Password"),
+                          obscureText: true,
+                          onChanged: (value) {
+                            _loginBloc.add(PasswordChanged(value));
+                          },
+                        ),
+                        const SizedBox(height: 10),
+
+                    
+
                         const SizedBox(height: 20),
-                        LoginButton(formKey: _formKey),
+
+                   CustomButton(
+          isPrimary: true,
+          btnText: state is LoginLoading ? 'Loading...' : 'Login',
+    
+   onTap: state is LoginLoading
+      ? null
+      : () {
+          if (_formKey.currentState!.validate()) {
+            final mobile = _mobileController.text.trim();
+            final pass = _passController.text.trim();
+
+            if (mobile.isEmpty || pass.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Please enter phone & password")),
+              );
+              return;
+            }
+
+            _loginBloc.add(Submit(
+              mobile: mobile,
+              pass: pass,
+            ));
+          }
+        },
+  // child: state is LoginLoading
+  //     ? const CircularProgressIndicator(color: Colors.white)
+  //     : const Text("Login"),
+),
+
                       ],
                     );
                   },

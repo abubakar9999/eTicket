@@ -11,6 +11,15 @@ class GetDataFromAPi {
     return userModel;
   }
 
+
+    //************** sub user log in ******************* */
+
+  Future<User> subuserLogIn(Map<String, String> body,id) async {
+    User userModel = await Repositories().subuserlogin(body,id);
+    
+    return userModel;
+  }
+
   // //******************* branch urse ******************* */
   // Future<List<String>> branchUserList() async {
   //   BranchUsers allusers = await Repositories().userList();

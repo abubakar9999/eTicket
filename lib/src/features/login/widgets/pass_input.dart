@@ -8,41 +8,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PassInput extends StatelessWidget {
   final FocusNode pass;
-  const PassInput({super.key, required this.pass});
+  final String passs;
+
+  const PassInput({Key? key, required this.pass, required this.passs})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
-        return CustomTextWithHeaderField(
-          headerText: "Password",
-          hintText: 'Enter Password',
+        return TextFormField(
+          obscureText: true,
           focusNode: pass,
-          isPassword: true, // ✅ enables visibility toggle
-          isShowSuffixIcon: true, // ✅ show eye icon
-          prefixIcon: Icons.lock,
           onChanged: (value) {
-            context.read<LoginBloc>().add(PasswordChanged(pass: value ?? ""));
+            context.read<LoginBloc>().add(PasswordChanged( value));
           },
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Enter password';
-            }
-            if (value.length < 6) {
-              return "Password must be at least 6 characters";
-            }
-            return null;
-          },
-          // onFieldSubmitted: (value) {
-          //   // you can handle submit or move to next field here
-          // },
+          decoration: const InputDecoration(
+            labelText: 'Password',
+            border: OutlineInputBorder(),
+          ),
         );
       },
     );
   }
 }
-
 
 
 

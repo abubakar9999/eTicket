@@ -5,58 +5,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MobileInput extends StatelessWidget {
   final FocusNode mobile;
-  const MobileInput({super.key, required this.mobile});
+  final String mobiles;
+
+  const MobileInput({Key? key, required this.mobile, required this.mobiles})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.mobile != current.mobile,
       builder: (context, state) {
-        return CustomTextWithHeaderField(
-          headerText: "Mobile No",
+        return TextFormField(
           keyboardType: TextInputType.phone,
           focusNode: mobile,
-          hintText: 'Enter Mobile No',
-          prefixIcon: Icons.phone_android,
           onChanged: (value) {
-            
-          
-  context.read<LoginBloc>().add(MobileChanged(mobile:  value?? ''));
-
+            context.read<LoginBloc>().add(MobileChanged( value));
           },
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Enter mobile no';
-            }
-            if (!RegExp(r'^[0-9]{10,15}$').hasMatch(value)) {
-              return "Enter valid mobile no";
-            }
-            return null;
-          },
-        );
-
-
-
-        TextFormField(
-          keyboardType: TextInputType.phone,
-          focusNode: mobile,
           decoration: const InputDecoration(
-            hintText: 'Mobile Number',
+            labelText: 'Mobile No',
             border: OutlineInputBorder(),
           ),
-          onChanged: (value) {
-            context.read<LoginBloc>().add(MobileChanged(mobile: value));
-          },
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Enter mobile number';
-            }
-            if (!RegExp(r'^[0-9]{10,15}$').hasMatch(value)) {
-              return "Enter valid mobile number";
-            }
-            return null;
-          },
-          onFieldSubmitted: (value) {},
         );
       },
     );
