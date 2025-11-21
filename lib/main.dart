@@ -1,4 +1,5 @@
 import 'package:eticket/src/features/login/blocs/login_bloc.dart';
+import 'package:eticket/src/features/user/bloc/users_bloc.dart';
 import 'package:eticket/src/features/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<LoginBloc>(
           create: (context) => LoginBloc(),
+        ),
+        BlocProvider<UsersBloc>(
+          create: (context) => UsersBloc(),
         ),
       ],
    

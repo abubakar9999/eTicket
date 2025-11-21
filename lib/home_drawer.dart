@@ -1,3 +1,5 @@
+import 'package:eticket/src/core/utils/context.dart';
+import 'package:eticket/src/features/user/users.dart';
 import 'package:eticket/src/features/vehicles_owner/vehicles_owner_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +53,13 @@ class _AppDrawerState extends State<AppDrawer> {
               title: Text('Vehicles'),
               leading: const Icon(Icons.directions_car),
               onTap: () {
+              },
+            ),
+            ListTile(
+              title: Text('Users'),
+              leading: const Icon(Icons.directions_car),
+              onTap: () {
+                context.push(CreateUserScreen());
               },
             ),
             ExpansionTile(
