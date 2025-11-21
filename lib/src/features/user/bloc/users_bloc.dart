@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:eticket/session_manager.dart';
 import 'package:eticket/src/data/repositoris/repositories.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,7 +13,9 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
   UsersBloc() : super(_Initial()) {
     on<CreateUser>((event, emit)async {
 
-    final data =  await Repositories().createUser(event.body);
+String token =await SessionManager().getAuthToken();
+log(token, name: "auth token in user bloc");
+    final data =  await Repositories().createUser(event.body,);
 
     
     if(data.contains("Unauthorized") || data.contains("error")){

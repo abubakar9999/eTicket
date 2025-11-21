@@ -55,11 +55,12 @@ class ApiClient {
     log('post data api');
     log(url);
     log(data.toString(), name: "post body is");
+    final token= await SessionManager().getAuthToken();
     final response = await http.post(
       Uri.parse(url),
       body: jsonEncode(data),
       headers: {
-        'Authorization': '${SessionManager().getAuthToken()}',
+        'Authorization': token,
        
       },
     );
